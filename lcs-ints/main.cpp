@@ -8,6 +8,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <vector>
+#include <time.h>
 #include <string>
 
 typedef struct memo_table_ints {
