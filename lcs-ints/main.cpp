@@ -52,9 +52,9 @@ std::vector<int> lcs_ints(std::vector<int>& x, std::vector<int>& y, m_table_ints
         if(x[length_x - 1] == y[length_y - 1]) {
             std::vector<int> x_subvec = {x.begin(), x.end() - 1};
             std::vector<int> y_subvec = {y.begin(), y.end() - 1};
-            result.push_back(x[length_x - 1]);
             std::vector<int> result_loc = lcs_ints(x_subvec, y_subvec, memo_table);
             result.insert(result.end(), result_loc.begin(), result_loc.end());
+            result.push_back(x[length_x - 1]);
         }
         
         //Add results to memo table
@@ -72,12 +72,8 @@ std::vector<int> longest_common_subs(std::vector<int>& x, std::vector<int>& y) {
     int len2 = (int) y.size();
     
     //Compute max length input strings
-    if(len1 < len2) {
-        max_size = len2;
-    }
-    else {
-        max_size = len1;
-    }
+    if(len1 < len2) { max_size = len2; }
+    else { max_size = len1; }
     
     //Initialize memo table
     m_table_ints** memo_table = new m_table_ints*[max_size];
@@ -94,15 +90,7 @@ std::vector<int> longest_common_subs(std::vector<int>& x, std::vector<int>& y) {
     //Compute longest common subsequence
     std::vector<int> longest_cs = lcs_ints(x, y, memo_table);
     
-    //Reverse results
-    std::vector<int> l_c_s;
-    int lcs_len = (int) longest_cs.size();
-    
-    for(int i = lcs_len - 1; i > -1; --i) {
-        l_c_s.push_back(longest_cs[i]);
-    }
-    
-    return l_c_s;
+    return longest_cs;
 }
 
 void print_array(std::vector<int> arr) {
